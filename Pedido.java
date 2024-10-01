@@ -37,10 +37,10 @@ public class Pedido {
     }
 
     public void nextState(boolean accepted) {
-        if(this.state.equals("em-espera") && accepted) {
+        if (accepted && this.state.equals("em-espera")) {
             this.state = "processado";
         }
-        if(accepted && this.state.equals("em-espera")) {
+        if (!accepted && this.state.equals("em-espera")) {
             this.state = "rejeitado";
         }
     }
