@@ -28,20 +28,24 @@ public class Estoque {
         }
     }
 
-    public void takeItem(String nome, Integer amount) {
+    public void takeItem(String nome, Pedido pedido) {
         Integer amountInMap = this.itens.get(nome);
+        Integer amount = pedido.getItemAmount(nome);
         if (amountInMap == null || amountInMap < amount) {
+            pedido.nextState(false);
             ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
             scheduler.scheduleAtFixedRate(() -> {
                 Integer currentAmount = this.itens.get(nome);
                 if (currentAmount != null && currentAmount > amount) {
                     this.itens.put(nome, (currentAmount - amount));
+                    pedido.nextState(true);
                     System.out.println("tirei " + amount + " depois da espera");
                     scheduler.shutdownNow();
                 }
             }, 0, 5, TimeUnit.SECONDS);
         } else {
             this.itens.put(nome, (amountInMap - amount));
+            pedido.nextState(true);
             System.out.println("tirei " + amount + " sem esperar");
         }
     }

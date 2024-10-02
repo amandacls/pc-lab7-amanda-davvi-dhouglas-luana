@@ -22,6 +22,10 @@ import java.util.Random;
 public class Pedido {
     private final int id;
 
+    public void setState(String state) {
+        this.state = state;
+    }
+
     private String state;
 
     private ArrayList<Item> itens;
@@ -43,7 +47,12 @@ public class Pedido {
         if (!accepted && this.state.equals("em-espera")) {
             this.state = "rejeitado";
         }
+        if(accepted && this.state.equals("rejeitado")) {
+            this.state = "processado";
+        }
     }
+
+    public  void resetState() { this.state = "em-espera"; }
 
     public int getId() {
         return id;
@@ -63,6 +72,16 @@ public class Pedido {
 
     public void removeItem(Item item) {
         this.itens.remove(item);
+    }
+
+    public Integer getItemAmount(String nome) {
+        int count = 0;
+        for (Item item: this.itens) {
+            if (item.getNome().equals(nome)) {
+                count += 1;
+            }
+        }
+        return count;
     }
 
     public int count(Item item) {
