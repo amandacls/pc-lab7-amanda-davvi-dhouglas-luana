@@ -10,5 +10,6 @@ public class Main {
 
         estoque.iniciarAbastecimento(produtos);
         estoque.iniciarReabastecimento(produtos);
+
     }
 }

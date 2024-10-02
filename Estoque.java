@@ -28,6 +28,24 @@ public class Estoque {
         }
     }
 
+    public void takeItem(String nome, Integer amount) {
+        Integer amountInMap = this.itens.get(nome);
+        if (amountInMap == null || amountInMap < amount) {
+            ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+            scheduler.scheduleAtFixedRate(() -> {
+                Integer currentAmount = this.itens.get(nome);
+                if (currentAmount != null && currentAmount > amount) {
+                    this.itens.put(nome, (currentAmount - amount));
+                    System.out.println("tirei " + amount + " depois da espera");
+                    scheduler.shutdownNow();
+                }
+            }, 0, 5, TimeUnit.SECONDS);
+        } else {
+            this.itens.put(nome, (amountInMap - amount));
+            System.out.println("tirei " + amount + " sem esperar");
+        }
+    }
+
     public void addItem(String nome, Integer amount) {
         Integer amountInMap = this.itens.get(nome);
         if (amountInMap != null && amountInMap >= 0) {
@@ -54,6 +72,7 @@ public class Estoque {
                 addItem(p, 10);
             }
             System.out.println("Sistema reabastecido com 10 itens de " + produto.length + " produtos");
+            System.out.println(this.itens.values());
         }, 0, 10, TimeUnit.SECONDS);
     }
 }
