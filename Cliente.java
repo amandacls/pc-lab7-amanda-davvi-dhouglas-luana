@@ -1,16 +1,23 @@
-import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
 
 public class Cliente {
     private String nome;
-    private ScheduledExecutorService pedidos;
+    private ExecutorService pedidos;
 
-    public Cliente(String nome, ScheduledExecutorService pedidos) {
+    public Cliente(String nome, ExecutorService pedidos) {
         this.nome = nome;
         this.pedidos = pedidos;
     }
 
-    public void criarPedido(Item[] itens) {
+    public void criarPedido(Item[] itens, BlockingQueue<Pedido> fila) {
         Pedido pedido = new Pedido(itens, this);
-        pedidos.
+        pedidos.submit(() -> {
+            try {
+                fila.put(pedido);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }
