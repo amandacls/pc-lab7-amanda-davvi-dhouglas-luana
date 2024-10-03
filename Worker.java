@@ -11,8 +11,9 @@ public class Worker {
         this.filaPedido = filaPedido;
     }
 
+    // Verificar simultânea se tem todos os itens, se não tiver Rejeita
 
-
+    // Verificar todos os itens antes de atualizar, por isso tem o sychronized evitar que um worker altere o estoque ao mesmo tempo
     public synchronized void work() {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(() -> {
@@ -26,14 +27,16 @@ public class Worker {
 
              for (Item item: itens) {
                  if (this.estoque.verificaQuantidadeProduto(item.getProduto(), item.getQuantidade())) {
-                     executor.submit(this.estoque.takeItem(item.getProduto(), item.getQuantidade()));
+                     executor.submit(() -> {
+                         this.estoque.takeItem(item.getProduto(), item.getQuantidade());
+                     });
                  }
              }
 
 
         }, 0, 5, TimeUnit.SECONDS);
     }
-
+/*
     public synchronized void processarPedido(Pedido pedido) {
         Item[] itens = pedido.getListaItens();
 
@@ -56,4 +59,7 @@ public class Worker {
             }
         }
     }
+
+
+ */
 }

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.concurrent.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         BlockingQueue<Pedido> listaDePedidos = new LinkedBlockingDeque<Pedido>(3);
         ExecutorService clientes = Executors.newFixedThreadPool(9);
         ExecutorService workers = Executors.newFixedThreadPool(3);
@@ -32,10 +32,14 @@ public class Main {
 
         scheduler.scheduleAtFixedRate(() -> {
             cliente1.criarPedido(itens, listaDePedidos);
-        }, 0, 5, TimeUnit.SECONDS);
+        }, 0, 10, TimeUnit.SECONDS);
 
         scheduler.scheduleAtFixedRate(() -> {
             System.out.println("Lista de Pedidos: " + listaDePedidos);
-        }, 0, 5, TimeUnit.SECONDS);
+        }, 0, 2, TimeUnit.SECONDS);
+
+        Thread.sleep(5000);
+        Worker w = new Worker(estoque, listaDePedidos);
+        w.work();
     }
 }

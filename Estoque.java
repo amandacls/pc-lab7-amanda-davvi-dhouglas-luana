@@ -14,7 +14,7 @@ public class Estoque {
         return this.produtos.get(produto) >= quantidade;
     }
 
-    public synchronized void takeItem(Produto produto, Integer quantidade) {
+    public void takeItem(Produto produto, Integer quantidade) {
         Integer quantNoEstoque = this.produtos.get(produto);
         this.produtos.put(produto, (quantNoEstoque - quantidade));
     }
@@ -31,7 +31,7 @@ public class Estoque {
             produtos.forEach((p, q) -> System.out.println("O produto " + p.getNome() + " ainda tem " + q + " no estoque."));
         }, 0, 15, TimeUnit.SECONDS);
     }
-
+/*
     class TakeItem implements Runnable {
 
         private Produto produto;
@@ -48,5 +48,5 @@ public class Estoque {
             Integer quantNoEstoque = this.produtos.get(produto);
             this.produtos.put(produto, (quantNoEstoque - quantidade));
         }
-    }
+    } */
 }

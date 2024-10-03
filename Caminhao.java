@@ -18,9 +18,9 @@ public class Caminhao {
             Produto produto2 = new Produto("Sorvete");
             Produto produto3 = new Produto("Queijo");
 
-            estoque.adicionarItem(produto1, 12);
-            estoque.adicionarItem(produto2, 13);
-            estoque.adicionarItem(produto3, 14);
+            estoque.adicionarItem(produto1, 20);
+            estoque.adicionarItem(produto2, 20);
+            estoque.adicionarItem(produto3, 20);
         }, 0, INTERVALO, TimeUnit.SECONDS);
     }
 }
