@@ -1,28 +1,9 @@
 public class Item {
+    private Produto produto;
+    private Integer quantidade;
 
-    private String nome;
-
-    private double preco;
-
-    public Item(String nome, double preco) {
-        this.nome = nome;
-        this.preco = preco;
-    }
-
-
-    public String getNome() {
-        return nome;
-    }
-
-    public double getPreco() {
-        return preco;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
+    public Item(Produto produto, Integer quantidade) {
+        this.produto = produto;
+        this.quantidade = quantidade;
     }
 }
