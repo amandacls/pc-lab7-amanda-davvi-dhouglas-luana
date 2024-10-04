@@ -10,11 +10,16 @@ public class Cliente {
         this.pedidos = pedidos;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
     public void criarPedido(Item[] itens, BlockingQueue<Pedido> fila) {
         Pedido pedido = new Pedido(itens, this);
         pedidos.submit(() -> {
             try {
                 fila.put(pedido);
+                System.out.printf("Cliente %s criou pedido %d.\n", getNome(), pedido.getId());
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

@@ -11,9 +11,9 @@ public class Relatorio {
     private AtomicInteger pedidosRejeitados;
 
     public Relatorio () {
-        this.totalvendas = new AtomicInteger();
-        this.pedidosProcessados = new AtomicInteger();
-        this.pedidosRejeitados = new AtomicInteger();
+        this.totalvendas = new AtomicInteger(0);
+        this.pedidosProcessados = new AtomicInteger(0);
+        this.pedidosRejeitados = new AtomicInteger(0);
     }
 
     public void addVenda(Integer venda) {
@@ -25,7 +25,7 @@ public class Relatorio {
     }
 
     public void addPedidoRejeitado() {
-        this.pedidosProcessados.incrementAndGet();
+        this.pedidosRejeitados.incrementAndGet();
     }
 
     public void start() {

@@ -1,10 +1,19 @@
+import java.util.Random;
+
 public class Pedido {
+    private final int id;
     private Item[] listaItens;
     private Cliente cliente;
+    private static final Random random = new Random();
 
     public Pedido(Item[] itens, Cliente cliente) {
-        listaItens = itens;
+        this.listaItens = itens;
         this.cliente = cliente;
+        this.id = random.nextInt();
+    }
+
+    public int getId() {
+        return id;
     }
 
     public Item[] getListaItens() {

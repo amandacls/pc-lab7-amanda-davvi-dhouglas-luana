@@ -9,7 +9,7 @@ public class Caminhao {
 
     public Caminhao(Estoque estoque) {
         this.estoque = estoque;
-        agendador = Executors.newScheduledThreadPool(1);
+        this.agendador = Executors.newScheduledThreadPool(1);
     }
 
     public void reabastecer() {
