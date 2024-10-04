@@ -27,16 +27,33 @@ public class Main {
         Item[] itens = new Item[] {item1, item2, item3};
 
         Cliente cliente1 = new Cliente("Mannel", clientes);
+        Cliente cliente2 = new Cliente("Giovanni", clientes);
+        Cliente cliente3 = new Cliente("Massoni", clientes);
 
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(3);
 
         scheduler.scheduleAtFixedRate(() -> {
             cliente1.criarPedido(itens, listaDePedidos);
+            cliente2.criarPedido(itens, listaDePedidos);
+            cliente3.criarPedido(itens, listaDePedidos);
         }, 0, 10, TimeUnit.SECONDS);
 
-        Thread.sleep(5000);
-        Worker w = new Worker(estoque, listaDePedidos, relatorio);
-        w.work();
+        Worker worker1 = new Worker(estoque, listaDePedidos, relatorio);
+        Worker worker2 = new Worker(estoque, listaDePedidos, relatorio);
+        Worker worker3 = new Worker(estoque, listaDePedidos, relatorio);
+
+        workers.submit(() -> {
+            worker1.work();
+        });
+        
+        workers.submit(() -> {
+            worker2.work();
+        });
+
+        workers.submit(() -> {
+            worker3.work();
+        });
+
         relatorio.start();
     }
 }
