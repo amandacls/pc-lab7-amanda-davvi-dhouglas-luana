@@ -6,6 +6,8 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         BlockingQueue<Pedido> listaDePedidos = new LinkedBlockingDeque<Pedido>(3);
         ExecutorService clientes = Executors.newFixedThreadPool(9);
+        Relatorio relatorio = new Relatorio();
+
         ExecutorService workers = Executors.newFixedThreadPool(3);
 
         Estoque estoque = new Estoque();
@@ -16,9 +18,9 @@ public class Main {
 
         // Temporário
 
-        Produto produto1 = new Produto("Macarrao");
-        Produto produto2 = new Produto("Sorvete");
-        Produto produto3 = new Produto("Queijo");
+        Produto produto1 = new Produto("Macarrao", 720);
+        Produto produto2 = new Produto("Sorvete", 170);
+        Produto produto3 = new Produto("Queijo", 200);
 
         Item item1 = new Item(produto1, 5);
         Item item2 = new Item(produto2, 5);
@@ -39,7 +41,7 @@ public class Main {
         }, 0, 2, TimeUnit.SECONDS);
 
         Thread.sleep(5000);
-        Worker w = new Worker(estoque, listaDePedidos);
+        Worker w = new Worker(estoque, listaDePedidos, relatorio);
         w.work();
     }
 }

@@ -31,22 +31,24 @@ public class Estoque {
             produtos.forEach((p, q) -> System.out.println("O produto " + p.getNome() + " ainda tem " + q + " no estoque."));
         }, 0, 15, TimeUnit.SECONDS);
     }
-/*
-    class TakeItem implements Runnable {
+    static class TakeItem implements Runnable {
 
         private Produto produto;
 
         private Integer quantidade;
 
-        public TakeItem(Produto produto, Integer quantidade) {
+        private Estoque estoque;
+
+        public TakeItem(Produto produto, Integer quantidade, Estoque estoque) {
             this.produto = produto;
             this.quantidade = quantidade;
+            this.estoque = estoque;
         }
 
         @Override
         public void run() {
-            Integer quantNoEstoque = this.produtos.get(produto);
-            this.produtos.put(produto, (quantNoEstoque - quantidade));
+            Integer quantNoEstoque = this.estoque.produtos.get(produto);
+            this.estoque.produtos.put(produto, (quantNoEstoque - quantidade));
         }
-    } */
+    }
 }

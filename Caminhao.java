@@ -14,9 +14,9 @@ public class Caminhao {
 
     public void reabastecer() {
         agendador.scheduleAtFixedRate(() -> {
-            Produto produto1 = new Produto("Macarrao");
-            Produto produto2 = new Produto("Sorvete");
-            Produto produto3 = new Produto("Queijo");
+            Produto produto1 = new Produto("Macarrao", 720);
+            Produto produto2 = new Produto("Sorvete", 170);
+            Produto produto3 = new Produto("Queijo", 200);
 
             estoque.adicionarItem(produto1, 20);
             estoque.adicionarItem(produto2, 20);

@@ -1,8 +1,16 @@
 public class Produto {
     private String nome;
 
-    public Produto(String nome) {
+
+    private Integer preco;
+
+    public Produto(String nome, Integer preco) {
         this.nome = nome;
+        this.preco = preco;
+    }
+
+    public Integer getPreco() {
+        return preco;
     }
 
     public String getNome() {
