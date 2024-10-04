@@ -1,8 +1,10 @@
 public class Produto {
     private String nome;
-
-
     private Integer preco;
+
+    public Produto(String nome) {
+        this.nome = nome;
+    }
 
     public Produto(String nome, Integer preco) {
         this.nome = nome;

@@ -19,7 +19,6 @@ public class Cliente {
         pedidos.submit(() -> {
             try {
                 fila.put(pedido);
-                System.out.printf("Cliente %s criou pedido %d.\n", getNome(), pedido.getId());
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

@@ -14,15 +14,14 @@ public class Main {
         Caminhao sidinho = new Caminhao(estoque);
 
         sidinho.reabastecer();
-        estoque.mostrarEstoque();
 
         Produto produto1 = new Produto("Macarrao", 5);
-        Produto produto2 = new Produto("Sorvete", 10);
-        Produto produto3 = new Produto("Queijo", 15);
+        Produto produto2 = new Produto("Sorvete", 30);
+        Produto produto3 = new Produto("Queijo", 20);
 
-        Item item1 = new Item(produto1, 120);
-        Item item2 = new Item(produto2, 120);
-        Item item3 = new Item(produto3, 120);
+        Item item1 = new Item(produto1, 5);
+        Item item2 = new Item(produto2, 5);
+        Item item3 = new Item(produto3, 5);
 
         Item[] itens = new Item[] {item1, item2, item3};
 
@@ -45,7 +44,7 @@ public class Main {
         workers.submit(() -> {
             worker1.work();
         });
-        
+
         workers.submit(() -> {
             worker2.work();
         });

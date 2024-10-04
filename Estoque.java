@@ -69,14 +69,6 @@ public class Estoque {
 
     public void adicionarItem(Produto produto, Integer quantidade) {
         produtos.merge(produto, quantidade, Integer::sum);
-        System.out.printf("Estoque abastecido com %d item de %s.\n", quantidade, produto.getNome());
-    }
-
-    public void mostrarEstoque() {
-        ScheduledExecutorService agendador = Executors.newScheduledThreadPool(1);
-
-        agendador.scheduleAtFixedRate(() -> {
-            produtos.forEach((p, q) -> System.out.println("O produto " + p.getNome() + " ainda tem " + q + " no estoque."));
-        }, 0, 15, TimeUnit.SECONDS);
+        // System.out.printf("Estoque abastecido com %d item de %s.\n", quantidade, produto.getNome());
     }
 }
